@@ -167,7 +167,7 @@ body {
 
 .mission-btn {
     width: 100%;
-    background: linear-gradient(45deg, #4CAF50, #45a049);
+    background: linear-gradient(45deg, #808080, #696969);
     color: white;
     border: none;
     border-radius: 25px;
@@ -178,7 +178,7 @@ body {
     transition: all 0.3s ease;
     text-transform: uppercase;
     letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+    box-shadow: 0 4px 15px rgba(128, 128, 128, 0.3);
 }
 
 .mission-btn:hover {

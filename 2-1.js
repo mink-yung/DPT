@@ -7,41 +7,121 @@ document.addEventListener('DOMContentLoaded', function() {
     loadLocations();
 });
 
-// 카카오 지도 초기화
+// Kakao map initialization
 function initializeKakaoMap() {
     try {
-        // 카카오 지도 생성
+        // Create Kakao map
         const container = document.getElementById('kakao-map');
         const options = {
-            center: new kakao.maps.LatLng(37.2635727, 127.0286009), // 수원대학교 좌표
+            center: new kakao.maps.LatLng(37.210141, 126.975231), // Suwon University campus center
             level: 3
         };
         
         const map = new kakao.maps.Map(container, options);
         
-        // 지도 로딩 완료 후 placeholder 제거
+        // Remove placeholder after map loading
         const placeholder = container.querySelector('.map-placeholder');
         if (placeholder) {
             placeholder.style.display = 'none';
         }
         
-        console.log('카카오 지도 초기화 완료');
+        // Add location markers
+        addLocationMarkers(map);
+        
+        console.log('Kakao map initialization complete');
         
     } catch (error) {
-        console.error('카카오 지도 초기화 오류:', error);
+        console.error('Kakao map initialization error:', error);
         showMapError();
     }
 }
 
-// 지도 오류 표시
-function showMapError() {
-    const mapContainer = document.getElementById('kakao-map');
-    mapContainer.innerHTML = `
-        <div class="error">
-            지도를 불러오는 중 오류가 발생했습니다.<br>
-            잠시 후 다시 시도해주세요.
-        </div>
-    `;
+// Add location markers to map
+function addLocationMarkers(map) {
+    // 수원대학교 실제 건물 위치 좌표 데이터
+    const locations = [
+        { id: 1, name: '중앙도서관', lat: 37.213233, lng: 126.974955 },
+        { id: 2, name: '학생회관', lat: 37.214152, lng: 126.975451 },
+        { id: 3, name: '종합관(본관)', lat: 37.211562, lng: 126.976928 },
+        { id: 4, name: '아마랜스홀', lat: 37.212354, lng: 126.978931 },
+        { id: 5, name: '정문', lat: 37.209841, lng: 126.975131 },
+        { id: 6, name: '미래혁신관', lat: 37.210452, lng: 126.977451 },
+        { id: 7, name: '인문사회융합대학', lat: 37.212563, lng: 126.975821 },
+        { id: 8, name: 'SW융합대학(IT대학)', lat: 37.213652, lng: 126.976851 },
+        { id: 9, name: '야구장', lat: 37.215231, lng: 126.972541 },
+        { id: 10, name: '대운동장', lat: 37.214852, lng: 126.973851 }
+    ];
+   // 이후 마커 생성 로직...
+    locations.forEach(location => {
+        // Create marker position
+        const markerPosition = new kakao.maps.LatLng(location.lat, location.lng);
+        
+        // Create red dot marker image
+        const markerImage = new kakao.maps.MarkerImage(
+            'https://maps.google.com/mapfiles/ms/icons/red-dot.png', // Red dot icon
+            new kakao.maps.Size(32, 32), // Icon size
+            new kakao.maps.Point(16, 16) // Anchor point (center)
+        );
+        
+        // Create marker with red dot image
+        const marker = new kakao.maps.Marker({
+            position: markerPosition,
+            map: map,
+            image: markerImage
+        });
+        
+        // Create info window
+        const infoWindow = new kakao.maps.InfoWindow({
+            content: `<div style="padding:5px;font-size:12px;">${location.name}</div>`,
+            removable: true
+        });
+        
+        // Add click event to marker
+        kakao.maps.event.addListener(marker, 'click', function() {
+            // Show info window
+            infoWindow.open(map, marker);
+            
+            // Scroll to card section
+            scrollToCardSection(location.id);
+            
+            // Navigate to detail page after a short delay
+            setTimeout(() => {
+                selectMission(location.id);
+            }, 1000);
+        });
+        
+        // Store marker reference for later use
+        location.marker = marker;
+        location.infoWindow = infoWindow;
+    });
+    
+    console.log('Added red dot markers to Suwon University campus map');
+}
+
+// Scroll to card section and highlight specific card
+function scrollToCardSection(locationId) {
+    // Find the target card
+    const targetCard = document.querySelector(`[data-id="${locationId}"]`);
+    
+    if (targetCard) {
+        // Scroll to the treasure status section
+        const treasureSection = document.querySelector('.treasure-status-section');
+        if (treasureSection) {
+            treasureSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        
+        // Highlight the target card
+        targetCard.style.border = '3px solid #00ff00';
+        targetCard.style.boxShadow = '0 0 20px rgba(0, 255, 0, 0.5)';
+        
+        // Remove highlight after 2 seconds
+        setTimeout(() => {
+            targetCard.style.border = '';
+            targetCard.style.boxShadow = '';
+        }, 2000);
+        
+        console.log(`Scrolled to card for location ${locationId}`);
+    }
 }
 
 // GET /locations API 호출

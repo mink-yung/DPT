@@ -244,8 +244,8 @@ function openInputModal(mode) {
 
 // 버튼 4: 관리자 -> 관리자 비밀번호 인증페이지로 이동
 function goToAdmin() {
-    // 임시로 관리자 페이지로 이동
-    window.location.href = 'admin.html';
+    // 관리자 인증 페이지로 이동
+    window.location.href = '4-0.html';
 }
 
 // 버튼 5: 불편사항 제보하기 -> 오픈채팅 카톡창으로 이동

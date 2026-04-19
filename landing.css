@@ -301,30 +301,38 @@ body {
 
 .btn-primary {
     background: transparent;
-    min-width: 350px;
+    min-width: 150px;
+    max-width: 150px;
     padding: 0;
     border: none;
+    overflow: hidden;
 }
 
 .btn-secondary {
     background: transparent;
-    min-width: 300px;
+    min-width: 120px;
+    max-width: 120px;
     padding: 0;
     border: none;
+    overflow: hidden;
 }
 
 .btn-admin {
     background: transparent;
-    min-width: 300px;
+    min-width: 120px;
+    max-width: 120px;
     padding: 0;
     border: none;
+    overflow: hidden;
 }
 
 .btn-report {
     background: transparent;
-    min-width: 300px;
+    min-width: 120px;
+    max-width: 120px;
     padding: 0;
     border: none;
+    overflow: hidden;
 }
 
 /* 하단 섹션 */
@@ -390,13 +398,27 @@ body {
     }
     
     .button-row {
-        flex-direction: column;
+        flex-direction: row;
         align-items: center;
+        justify-content: center;
+        gap: 15px;
     }
     
-    .btn {
-        width: 100%;
-        max-width: 250px;
+    .btn-secondary {
+        width: 100px;
+        max-width: 100px;
+        margin-bottom: 10px;
+    }
+    
+    .btn-admin {
+        width: 100px;
+        max-width: 100px;
+        margin-bottom: 10px;
+    }
+    
+    .btn-report {
+        width: 100px;
+        max-width: 100px;
         margin-bottom: 10px;
     }
     
@@ -432,5 +454,22 @@ body {
     .logo {
         width: 60px;
         height: 60px;
+    }
+    
+    .modal-close-btn {
+        width: 40px;
+        height: 40px;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .modal-header {
+        padding: 15px;
+        min-height: 70px;
+    }
+    
+    .modal-container {
+        width: 95%;
+        margin: 10px;
     }
 }

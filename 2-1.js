@@ -190,8 +190,8 @@ function showLoadError() {
 function selectMission(locationId) {
     console.log('선택된 장소 ID:', locationId);
     
-    // 상세 페이지로 이동 (URL 파라미터로 id 전달)
-    window.location.href = `detail.html?id=${locationId}`;
+    // 미션 페이지로 이동 (URL 파라미터로 id 전달)
+    window.location.href = `2-1A.html?id=${locationId}`;
 }
 
 // 뒤로가기 버튼 기능

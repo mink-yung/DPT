@@ -167,8 +167,12 @@ function submitForm() {
     // 잠시 후 모달창 닫고 다른 페이지로 이동
     setTimeout(() => {
         closeInputModal();
-        // 다른 페이지로 이동 (사용자가 지정할 경로)
-        window.location.href = '2-1.html'; // 이 경로는 사용자가 변경할 수 있음
+        // 모드에 따라 다른 페이지로 이동
+        if (window.currentModalMode === 'hide') {
+            window.location.href = '3-1.html'; // 숨기러가기는 3-1.html로
+        } else {
+            window.location.href = '2-1.html'; // 찾으러가기는 2-1.html로
+        }
     }, 1500);
 }
 
@@ -233,6 +237,9 @@ function openInputModal(mode) {
     if (modalTitle) {
         modalTitle.textContent = mode === 'find' ? '찾으러 가기' : '숨기러 가기';
     }
+    
+    // 현재 모드 저장
+    window.currentModalMode = mode;
 }
 
 // 버튼 4: 관리자 -> 관리자 비밀번호 인증페이지로 이동

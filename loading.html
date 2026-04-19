@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>loading - doyamin treasure</title>
+    <link rel="stylesheet" href="loading.css">
+</head>
+<body>
+    <!-- header: close button (right), logo (center), text (center below logo) -->
+    <header class="loading-header">
+        <button class="close-btn" id="closeBtn">
+            <img src="./img/close-btn.png" alt="close" class="btn-image">
+        </button>
+        <div class="logo-container">
+            <img src="./img/bennerminilogo.png" alt="logo" class="loading-logo">
+        </div>
+        <div class="loading-title">
+            <h2>treasure box is opening...</h2>
+        </div>
+    </header>
+
+    <!-- main content -->
+    <main class="loading-content">
+        <!-- center loading image -->
+        <section class="loading-image-section">
+            <div class="loading-animation">
+                <img src="./img/loading.png" alt="loading" class="loading-image">
+            </div>
+        </section>
+
+        <!-- bottom text -->
+        <section class="loading-status">
+            <p class="status-text">checking answer...<br>please wait a moment</p>
+        </section>
+    </main>
+
+    <script src="loading.js"></script>
+</body>
+</html>

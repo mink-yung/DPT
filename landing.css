@@ -31,7 +31,7 @@ body {
 }
 
 .modal-container {
-    background: rgba(128, 128, 128, 0.3); /* Gray background with 30% transparency */
+    background: white;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     z-index: 1001;
@@ -42,6 +42,11 @@ body {
     transform: scale(0.9);
     opacity: 0;
     transition: all 0.3s ease;
+}
+
+/* Rules modal specific styling */
+#rulesModalContainer {
+    background: rgba(128, 128, 128, 0.3); /* Gray background with 30% transparency */
 }
 
 .modal-overlay.active .modal-container {

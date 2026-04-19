@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>미션 - 도파민 보물섬</title>
+    <link rel="stylesheet" href="2-1A.css">
+</head>
+<body>
+    <!-- 상단: 닫기 버튼(왼쪽 위)와 로고(중앙) -->
+    <header class="mission-header">
+        <button class="back-btn" id="backBtn">
+            <img src="./img/back.png" alt="뒤로가기" class="btn-image">
+        </button>
+        <div class="logo-container">
+            <img src="./img/bennerminilogo.png" alt="로고" class="mission-logo">
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="mission-content">
+        <!-- 미션 카드 -->
+        <section class="mission-card">
+            <h2 class="mission-title">미션</h2>
+            <div class="mission-content" id="missionContent">
+                <!-- API에서 받은 미션 내용이 여기에 표시됩니다 -->
+            </div>
+        </section>
+
+        <!-- 하단 입력창 -->
+        <section class="input-section">
+            <div class="input-card">
+                <input type="text" id="answerInput" placeholder="정답을 입력하세요" class="answer-input">
+                <button class="ok-btn" id="okBtn">
+                    <img src="./img/okBtn.png" alt="오케이" class="btn-image">
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="2-1A.js"></script>
+</body>
+</html>

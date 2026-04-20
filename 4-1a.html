@@ -6,7 +6,7 @@
     <title>관리자 전용 페이지</title>
     <link rel="stylesheet" href="landing.css">
     <style>
-        /* 4-0.html specific styles */
+        /* 4-1a.html specific styles */
         .admin-container {
             display: flex;
             flex-direction: column;
@@ -76,6 +76,14 @@
         .password-input:focus {
             outline: none;
             border-color: #667eea;
+        }
+        
+        .error-message {
+            color: red;
+            font-size: 1rem;
+            text-align: center;
+            margin-top: 10px;
+            font-weight: bold;
         }
         
         .admin-buttons {
@@ -170,21 +178,22 @@
                     placeholder="비밀번호 입력"
                     onkeypress="handleKeyPress(event)"
                 >
+                <div class="error-message">*비밀번호를 다시 입력하세요</div>
             </div>
             
-            <!-- 하단: 버튼2 (뒤로가기, 오케이) -->
+            <!-- 하단: 버튼 (오케이) -->
             <div class="admin-buttons">
                 <button class="admin-btn admin-btn-ok" onclick="goToNext()">
-                    <img src="./img/okBtn.png" alt="¿©ÄªÀÌ">
+                    <img src="./img/okBtn.png" alt="오케이">
                 </button>
             </div>
         </main>
     </div>
     
     <script>
-        // 뒤로가기 버튼: 이전 페이지로 이동
+        // 뒤로가기 버튼: 랜딩페이지로 이동
         function goBack() {
-            window.history.back();
+            window.location.href = 'landing.html';
         }
         
         // 오케이 버튼: 비밀번호 검증 후 이동
@@ -200,7 +209,8 @@
             if (password === '7740') {
                 window.location.href = '4-2.html';
             } else {
-                window.location.href = '4-1a.html';
+                // 비밀번호 틀리면 페이지 새로고침 (다시 4-1a로)
+                location.reload();
             }
         }
         

@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>미션 - 도파민 보물섬</title>
-    <link rel="stylesheet" href="2-1A.css">
+    <title>미션: 퀴즈</title>
+    <link rel="stylesheet" href="2-1.css">
 </head>
-<body>
-    <!-- 상단: 닫기 버튼(왼쪽 위)와 로고(중앙) -->
-    <header class="mission-header">
-        <button class="back-btn" id="backBtn">
-            <img src="./img/back.png" alt="뒤로가기" class="btn-image">
-        </button>
-        <div class="logo-container">
-            <img src="./img/bennerminilogo.png" alt="로고" class="mission-logo">
-        </div>
+
+<body class="mission-body">
+    <header class="header">
+        <button class="back-btn" onclick="history.back()"><img src="./img/back.png"></button>
+        <div class="logo-container"><img src="./img/bennerminilogo.png" class="logo"></div>
     </header>
 
-    <!-- 메인 콘텐츠 -->
     <main class="mission-content">
-        <!-- 미션 카드 -->
-        <section class="mission-card">
-            <h2 class="mission-title">미션</h2>
-            <div class="mission-content" id="missionContent">
-                <!-- API에서 받은 미션 내용이 여기에 표시됩니다 -->
+        <div class="mission-card">
+            <h2 id="location-name">장소 로딩 중...</h2>
+            <div class="mission-box">
+                <p class="mission-label">MISSION</p>
+                <p id="mission-text" class="mission-text">데이터를 불러오고 있습니다.</p>
             </div>
-        </section>
 
-        <!-- 하단 입력창 -->
-        <section class="input-section">
-            <div class="input-card">
-                <input type="text" id="answerInput" placeholder="정답을 입력하세요" class="answer-input">
-                <button class="ok-btn" id="okBtn">
-                    <img src="./img/okBtn.png" alt="오케이" class="btn-image">
-                </button>
-            </div>
-        </section>
+            <input type="text" id="quiz-answer" class="mission-input" placeholder="정답을 입력하세요">
+            <button class="submit-btn" onclick="submitQuiz()">정답 제출</button>
+        </div>
     </main>
 
-    <script src="2-1A.js"></script>
+    <script>
+        const API_URL = "https://dopamine-treasure-backend-production.up.railway.app";
+        const urlParams = new URLSearchParams(window.location.search);
+        const locationId = urlParams.get('id');
+
+        async function submitQuiz() {
+            const answer = document.getElementById('quiz-answer').value;
+            if (!answer) return alert("정답을 입력해주세요!");
+
+            const userInfo = JSON.parse(localStorage.getItem('userInfo')) || {};
+
+            const formData = new FormData();
+            // 데이터 유실 방지 (|| "기본값")
+            formData.append('name', userInfo.name || "익명");
+            formData.append('student_id', userInfo.student_id || "00000000");
+            formData.append('department', userInfo.department || "미소속");
+            formData.append('mission_type', 'quiz');
+            formData.append('answer', answer);
+
+            try {
+                const response = await fetch(`${API_URL}/locations/${locationId}/verify`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const result = await response.json();
+
+                if (result.status === 'success' || result.success) {
+                    const query = new URLSearchParams({
+                        status: 'success',
+                        type: result.treasure_type,
+                        content: result.content,
+                        img: result.image_path
+                    }).toString();
+                    location.href = `2-1-result.html?${query}`;
+                } else {
+                    location.href = "2-1-result.html?status=fail";
+                }
+            } catch (error) {
+                alert("서버 연결 실패");
+            }
+        }
+    </script>
 </body>
+
 </html>

@@ -23,14 +23,7 @@ function setupAllModalListeners() {
         modalCloseBtn.addEventListener('click', closeRulesModal);
     }
     
-    if (rulesModalOverlay) {
-        rulesModalOverlay.addEventListener('click', function(e) {
-            if (e.target === rulesModalOverlay) {
-                closeRulesModal();
-            }
-        });
-    }
-    
+        
     // 정보 입력 모달창 이벤트 리스너 설정
     setupInputModalListeners();
 }
@@ -121,23 +114,6 @@ function setupInputModalListeners() {
     // 닫기 버튼 클릭 이벤트
     modalCloseBtn.addEventListener('click', function() {
         closeInputModal();
-    });
-    
-    // 오버레이 클릭 시 닫기
-    modalOverlay.addEventListener('click', function(e) {
-        if (e.target === modalOverlay) {
-            closeInputModal();
-        }
-    });
-    
-    // ESC 키로 닫기
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            const modalOverlay = document.getElementById('inputModalOverlay');
-            if (modalOverlay.classList.contains('active')) {
-                closeInputModal();
-            }
-        }
     });
     
     // 오케이 버튼 클릭 이벤트
